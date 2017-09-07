@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table{
+            border: 1px solid silver;
+            padding: 10px;
+        }
+        thead{
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 1px solid silver;
+            /*padding-left: 20px;*/
+        }
+        td,th{
+            text-align: center;
+            display: inline-block;
+            width: 150px;
+        }
+        .even{/*偶数行*/
+            background: silver;
+        }
+        .odd{/*奇数行*/
+            background: #ffffee;
+        }
+        /*td:first-child{
+            width: 20px;
+        }*/
+        .selected{
+            background: red;
+        }
+        tr.parent{
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<!--<table>
+    <thead>
+         <tr>
+             <th>姓名</th>
+             <th>性别</th>
+             <th>暂住地</th>
+         </tr>
+    </thead>
+    <tbody>
+         <tr>
+             <td><label><input type="checkbox"/></label></td>
+             <td>张三</td>
+             <td>男</td>
+             <td>浙江宁波</td>
+         </tr>
+         <tr>
+             <td><label><input type="checkbox"/></label></td>
+             <td>李四</td>
+             <td>女</td>
+             <td>浙江杭州</td>
+         </tr>
+         <tr>
+             <td><label><input type="checkbox"/></label></td>
+             <td>王五</td>
+             <td>男</td>
+             <td>湖南长沙</td>
+         </tr>
+         <tr>
+             <td><label><input type="checkbox"/></label></td>
+             <td>赵六</td>
+             <td>男</td>
+             <td>浙江温州</td>
+         </tr>
+         <tr>
+             <td><label><input type="checkbox"/></label></td>
+             <td>Rain</td>
+             <td>男</td>
+             <td>湖南长沙</td>
+         </tr>
+    </tbody>
+</table>-->
+<label for="search">搜索:</label><input type="text" id="search"/>
+<table>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>暂住地</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="parent" id="a1">
+        <td>前台设计组</td>
+    </tr>
+    <tr class="b_a1">
+        <td>张三</td>
+        <td>男</td>
+        <td>浙江宁波</td>
+    </tr>
+    <tr class="parent" id="a2">
+        <td>前台开发组</td>
+    </tr>
+    <tr class="b_a2">
+        <td>李四</td>
+        <td>女</td>
+        <td>浙江杭州</td>
+    </tr>
+    <tr class="b_a2">
+        <td>王五</td>
+        <td>男</td>
+        <td>湖南长沙</td>
+    </tr>
+    <tr class="parent" id="a3">
+        <td>后台开发组</td>
+    </tr>
+    <tr class="b_a3">
+        <td>赵六</td>
+        <td>男</td>
+        <td>浙江温州</td>
+    </tr>
+    <tr class="b_a3">
+        <td>Rain</td>
+        <td>男</td>
+        <td>湖南长沙</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+<script src="js/jquery-1.7.2.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<script>
+    /*5表格应用*/
+
+    //5.1表格变色
+
+    //5.11普通的隔行变色
+
+    /*$('tbody tr:even').addClass('even');
+     $('tbody tr:odd').addClass('odd');//选择器中索引是从0开始的，索引第一行是偶数
+     //$('tr:contains("王五")').addClass('even');给单行增加高亮的方法contains*/
+
+    //5.12单选框控制表格行高亮
+
+    /*$('tbody>tr').on('click', function () {
+     $(this).addClass('selected').siblings().removeClass('selected')
+     .end()//使用siblings()后对象变为$(this).siblings(),所以这边使用end使后面的对象重新变为$(this)
+     .find(':radio').attr('checked',true)
+     });*/
+
+    //5.13复选框控制表格行亮高
+
+    /*$('tbody>tr').on('click', function () {
+     if ($(this).hasClass('selected')) {
+     $(this).removeClass('selected').find(':checkbox').attr('checked',false)
+     } else {
+     $(this).addClass('selected').find(':checkbox').attr('checked',true)
+     }
+     });*/
+
+    //以上代码可以简化为
+    /*$('tbody>tr').on('click', function () {
+     var hasSelected = $(this).hasClass('selected');
+     //三元运算，如果hasSelected是true，即选中状态，则取消选中状态，反之加上
+     $(this)[hasSelected?'removeClass':'addClass']('selected')
+     //查找checkbox，设置对应的属性
+     .find(':checkbox').attr('checked',!hasSelected)
+     })*/
+
+    //5.14表格展开与关闭
+    $('tr.parent').on('click', function () {
+        $(this).toggleClass('selected')
+                .siblings('.b_'+this.id).toggle();
+    });
+
+    //5.15表格内容筛选
+
+    $('#search').keyup(function () {
+        $('tbody tr').hide().filter(':contains(' + $(this).val() + ')').show();
+    })
+
+</script>
+</html>

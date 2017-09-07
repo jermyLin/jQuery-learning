@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        #wrap{
+            width: 730px;
+            height: 454px;
+            position: relative;
+            margin: 30px auto;
+            overflow: hidden;
+            border: 2px solid #333;
+            cursor: pointer;
+        }
+        li{
+            width:730px;
+            height: 454px;
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            top:0;
+            display: none;
+        }
+        li img{
+            width:730px;
+            height: 454px;
+        }
+
+        #buttons{
+            position: absolute;
+            width: 100%;
+            bottom: 15px;
+            z-index: 2;
+            text-align: center;
+        }
+        #buttons span{
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 12px;
+            color: white;
+            background: black;
+            /*float: left;*/
+            display: inline-block;
+            line-height: 20px;
+        }
+        #buttons .on{
+            background-color: orangered;
+        }
+        .arrow{
+            width: 40px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 38px;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
+            position: absolute;
+            top: 210px;
+            z-index: 2;
+            display: none;
+        }
+        .arrow:hover{
+            background: rgba(0,0,0,0.7);
+        }
+        #wrap:hover .arrow{
+            display: block;
+        }
+        #prev{
+            left: 10px;
+        }
+        #next{
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <ul class="list">
+        <li><img src="img/111.jpg" alt=""/></li>
+        <li><img src="img/222.jpg" alt=""/></li>
+        <li><img src="img/333.jpg" alt=""/></li>
+        <li><img src="img/444.jpg" alt=""/></li>
+        <li><img src="img/555.jpg" alt=""/></li>
+        <li><img src="img/666.jpg" alt=""/></li>
+    </ul>
+    <div id="buttons">
+        <span class="on">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </div>
+    <div>
+        <a href="javascript:"  class="arrow" id="prev">&lt;</a>
+        <a href="javascript:" class="arrow" id="next">&gt;</a>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.7.2.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<script>
+    var i = 1;
+    var $parent = $('#wrap');
+    var $list = $parent.find('ul.list');
+    var $span = $parent.find('span');
+    var $oli = $list.find('li');
+    //console.log($oli.length);
+    var v_width = $parent.width();//获取容器的宽度
+    $oli.eq(0).show();//显示第一张
+    //console.log(v_width);
+
+    /*点击上下页切换图片*/
+
+    $('#next').click(function () {
+        next()
+    });
+    $('#prev').click(function () {
+        prev();
+    });
+
+    function next(){
+        i= i>5?0:i;//当i大于5的时候也就是等于6时，让等于0，使底下span按钮高亮实现滚动
+        $span.eq(i).addClass('on')
+                .siblings().removeClass('on');
+        $oli.eq(i).fadeIn(500).siblings().fadeOut(500);
+        i++;
+    }
+    function prev(){
+        i--;
+        i= i<1?6:i;
+        $span.eq(i-1).addClass('on')
+                .siblings().removeClass('on');
+        $oli.eq(i-1).fadeIn(500).siblings().fadeOut(500);
+    }
+
+    //在下面span按钮通过鼠标移动实现图片切换
+
+    $span.each(function () {
+        $(this).mouseover(function() {
+            $(this).addClass('on').siblings().removeClass("on");
+            var index = $(this).index();//获取当前索引值
+            i = index+1;//使index值等于span的文本值，目的是为了让index值跟着底下按钮变化而变化，从而不会影响其他事件
+            // $("li").eq(index).show().siblings().hide();
+            $oli.eq(index).fadeIn(500).siblings().fadeOut(500);
+        });
+    });
+
+    //自动播放
+    $parent.hover(function () {
+        clearInterval(timer);
+    }, function () {
+        play();
+    });
+    function play(){
+        timer = setInterval(function(){
+            next();
+        },3000);
+    }
+    $parent.trigger(play());//加载页面就开始执行自动轮播
+    //play();
+</script>
+</html>

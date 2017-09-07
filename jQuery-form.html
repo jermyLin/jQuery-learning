@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        fieldset{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red ;
+        }
+        .haha input{
+            margin-bottom: 20px;
+            outline: none;
+            border: 1px solid silver;
+        }
+        /*input:focus,textarea:focus{
+            border: 1px solid #f00;
+            background: #f00;
+        }*/
+        #msg{
+            width: 100px;
+            height: 100px;
+            resize: none;
+        }
+        .focus{
+            border: 1px solid #f00;
+            background: #f00;
+        }
+        body>span{
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 5px 10px;
+            background-color: red;
+            cursor: pointer;
+        }
+        .content span{
+            display: block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            cursor: pointer;
+        }
+        .content{
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        select{
+            margin-left: 30px;
+        }
+        #hehe{
+            clear: both;
+
+        }
+        .int{
+            margin-bottom: 20px;
+        }
+        .int label{
+            width: 80px;
+            text-align: right;
+            float: left;
+            padding: 2px 0;
+        }
+        .high{
+            color: #a20000;
+        }
+        #hehe{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<span class="bigger">放大</span>
+<span class="smaller">缩小</span>
+<span class="up">向上</span>
+<span class="down">向下</span>
+<form action="#" class="haha">
+    <fieldset>
+        <legend><!--定义标题-->
+            个人信息
+        </legend>
+        <div>
+            <label for="uesname">名称:</label>
+            <input type="text" id="uesname"/>
+        </div>
+        <div>
+            <label for="pass">密码:</label>
+            <input type="password" id="pass"/>
+        </div>
+        <div>
+            <label for="msg">详细信息:</label>
+            <textarea id="msg">
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+                详细信息详细信息详细信息详细信息详细信息详细信息详细信息详细信息
+            </textarea>
+        </div>
+    </fieldset>
+</form>
+<form action="#" class="haha">
+    你爱好的运动是？<br>
+    <label>足球
+        <input type="checkbox" name="items" value="足球"/>
+    </label>
+    <label>篮球
+        <input type="checkbox" name="items" value="篮球"/>
+    </label>
+    <label>排球
+        <input type="checkbox" name="items" value="排球"/>
+    </label>
+    <label>羽毛球
+        <input type="checkbox" name="items" value="羽毛球"/>
+    </label>
+    <input type="button" id="CheckedAll" value="全选"/>
+    <input type="button" id="CheckedNo" value="全不选"/>
+    <input type="button" id="CheckedRev" value="反选"/>
+    <input type="submit" id="send" value="提交"/>
+</form>
+<form action="#">
+    你爱好的运动是？<br>
+    <label>足球
+        <input type="checkbox" name="items" value="足球"/>
+    </label>
+    <label>篮球
+        <input type="checkbox" name="items" value="篮球"/>
+    </label>
+    <label>排球
+        <input type="checkbox" name="items" value="排球"/>
+    </label>
+    <label>羽毛球
+        <input type="checkbox" name="items" value="羽毛球"/>
+    </label>
+    <input type="checkbox" id="CheckedAll1" value="全选"/><label  for="CheckedAll1">全选/全不选</label>
+</form>
+<div class="content">
+    <label for="select1"></label>
+    <select multiple id="select1" style="width: 100px;height: 160px">
+        <option value="1">选项1</option>
+        <option value="2">选项2</option>
+        <option value="3">选项3</option>
+        <option value="4">选项4</option>
+        <option value="5">选项5</option>
+        <option value="6">选项6</option>
+        <option value="7">选项7</option>
+        <option value="8">选项8</option>
+    </select>
+    <div>
+        <span id="add">选中的添加到右边&gt;&gt;</span>
+        <span id="addAll">全部添加到右边&gt;&gt;</span>
+    </div>
+</div>
+<div class="content">
+    <label for="select1"></label>
+    <select multiple id="select2" style="width: 100px;height: 160px">
+    </select>
+    <div>
+        <span id="remove">&lt;&lt;选中的删除到左边</span>
+        <span id="removeALL">&lt;&lt;选中的全部删除到左边</span>
+    </div>
+</div>
+<form action="#" id="hehe">
+    <div class="int">
+        <label for="usename">用户名:</label>
+        <input type="text" id="usename" class="required"/>
+    </div>
+    <div class="int">
+        <label for="email">邮箱:</label>
+        <input type="text" id="email" class="required"/>
+    </div>
+    <div class="int">
+        <label for="personinfo">个人资料:</label>
+        <input type="text" id="personinfo"/>
+    </div>
+    <div class="int">
+        <input type="submit" value="提交" id="send1"/>
+        <input type="reset" id="res"/>
+    </div>
+</form>
+</body>
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/jquery-validate.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<script>
+    /*1.单行文本框应用*/
+    /*$(function () {
+        $('input').focus(function () {
+            $(this).addClass('focus');
+        }).blur(function () {
+            $(this).removeClass('focus');
+        })
+    });*/
+    /*2.多行文本框应用*/
+
+    //2.1高度变化
+    var $msg = $('#msg');
+    /*$('.bigger').on('click', function () {
+        if($msg.height()<300||$msg.width()<300){
+            $msg.height($msg.height()+50);
+            $msg.width($msg.width()+50)
+        }
+    });
+    $('.smaller').on('click', function () {
+        if($msg.height()>50||$msg.width()>50){
+            $msg.height($msg.height()-50);
+            $msg.width($msg.width()-50)
+        }
+    })*/
+    $('.bigger').on('click', function () {
+        if($msg.height()<300||$msg.width()<300){
+            if (!$msg.is(':animated')) {
+                $msg.animate({height: '+=50', width: '+=50'}, 400);
+            }
+        }
+    });
+    $('.smaller').on('click', function () {
+        if($msg.height()>50||$msg.width()>50){
+            if (!$msg.is(':animated')) {
+                $msg.animate({height: '-=50', width: '-=50'}, 400);
+            }
+        }
+    });
+    //2.2滚动条变化
+    $('.up').on('click', function () {
+        if (!$msg.is(':animated')) {
+            $msg.animate({scrollTop: '-=50'}, 400);
+        }
+    });
+    $('.down').on('click', function () {
+        if (!$msg.is(':animated')) {
+            $msg.animate({scrollTop: '+=50'}, 400);
+        }
+    });
+    //2.3复选框应用
+    $('#CheckedAll').on('click',function () {
+        $(':checkbox').attr('checked',true)
+    });
+    $('#CheckedNo').on('click',function () {
+        $(':checkbox').attr('checked',false)
+    });
+    $('#CheckedRev').on('click',function () {
+        $(':checkbox').each(function () {
+            //$(this).attr('checked',!$(this).attr('checked'));
+            this.checked=!this.checked;
+        })
+    });
+    $('#send').on('click', function () {
+        var str = '你选中的是：\r\n';//\r是回车，\n是换行
+        $(':checkbox:checked').each(function () {//每个被选中的对象
+            str+=$(this).val()+'\r\n'
+        });
+        alert(str)
+    });
+    /*$('#CheckedAll1').on('click',function () {
+        if (this.checked) {
+            $(':checkbox').attr('checked', true)
+        }
+        else {
+            $(':checkbox').attr('checked', false)
+        }
+    });*/
+    //上面注释代码等于以下代码---如果全选/全不选框是checked状态，则所有的复选框都为checked状态，反之全取消
+    $('#CheckedAll1').on('click',function () {
+        $(':checkbox').attr('checked', this.checked)
+    });
+
+    //2.31当有其中某个复选框被取消选中状态时，全选/全不选框也要取消选中状态
+
+    $(':checkbox').on('click', function () {
+        var flag = true;
+        $(':checkbox').each(function () {
+            if (!this.checked) {
+                flag = false;
+            } else {
+                $('#CheckedAll1').attr('checked',true);//当取消选中的复选框重新被全部选中时，全选/全不选框也回到被选中状态
+            }
+        });
+        $('#CheckedAll1').attr('checked',flag);//当有其中某个复选框被取消选中状态时，全选/全不选框也要取消选中状态
+    });
+    /*$(':checkbox').on('click', function () {
+        var $tmp = $(':checkbox');
+        $('#CheckedAll1').attr('checked',$tmp.length==$tmp.filter(':checked').length);
+    });*/
+
+    /*3下拉框的应用*/
+
+    //3.1左右选项卡添加与删除
+    $('#add').on('click', function () {
+        var $options = $('#select1').find('option:selected');
+        /*var $remove = $options.remove();
+        $remove.appendTo('#select2')*/
+        $options.appendTo('#select2')
+    });
+    $('#addAll').on('click', function () {
+        var $options = $('#select1').find('option');
+        /*var $remove = $options.remove();
+         $remove.appendTo('#select2')*/
+        $options.appendTo('#select2')
+    });
+    $('#select1').on('dblclick', function () {
+        //var $options = $('#select1').find('option:selected');
+        var $options = $('option:selected',this);//this代表是当前对象下的option
+        $options.appendTo('#select2')
+    });
+
+    /*4表单验证*/
+
+    //4.1文本框后面添加*
+
+    $(':input.required').each(function () {
+        var $required = $('<strong class="high">*</strong>');
+        $(this).parent().append($required)
+    });
+
+    //4.2验证表单
+
+    var $hehe = $('#hehe').find('input');
+    $hehe.blur(function () {
+        var $parent = $(this).parent();
+        $parent.find('.formtips').remove();//删除以前的元素，避免重复提醒
+        //验证用户名
+        if($(this).is('#usename')){
+            if (this.value==''||this.value.length<6) {
+                var errorMsg = '请输入至少6位的用户名';
+                $parent.append('<span class="formtips onError">'+errorMsg+'</span>')
+            } else {
+                var okMsg = '输入正确';
+                $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>')
+            }
+        }
+        //邮箱验证
+        if($(this).is('#email')){
+            if (this.value==''||(this.value!=''&&! /.+@.+\.[a-zA-Z]{2,4}$/.test(this.value))) {//判断邮箱的格式
+                 errorMsg = '请输入正确的Email地址';
+                $parent.append('<span class="formtips onError">'+errorMsg+'</span>')
+            } else {
+                okMsg = '输入正确';
+                $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>')
+            }
+        }
+    }).keyup(function () {//实现输入时就提醒输入是否正确
+        $(this).triggerHandler('blur');//triggerHandler只会触发元素绑定的blur事件，不会触发浏览器默认的blur事件
+    }).focus(function () {//实现聚焦时就提醒输入是否正确
+        $(this).triggerHandler('blur');
+    });
+    //整体验证
+    $('#send1').on('click',function () {
+        $(':input.required').trigger('blur');
+        var numError = $('.onError').length;
+        if(numError){//等价于numError>0，当numError==0时，if(numError)为false，所以不执行{}里面的表达式
+            return false
+        }
+        alert('注册成功，密码已经发到你邮箱')
+    });
+/*EventUtil.addHandler(textbox,'keypress', function (event) {
+    event = EventUtil.getEvent(event);
+    EventUtil.preventDefault(event)
+})*/
+</script>
+</html>

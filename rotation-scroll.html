@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        #wrap{
+            width: 730px;
+            height: 454px;
+            position: relative;
+            margin: 30px auto;
+            overflow: hidden;
+            border: 2px solid #333;
+            cursor: pointer;
+        }
+        ul{
+            position: absolute;
+            width:5840px;
+            height: 454px;
+            z-index: 1;
+            left: -730px;
+        }
+        li{
+            float: left;
+        }
+
+        #buttons{
+            position: absolute;
+            width: 100%;
+            bottom: 15px;
+            z-index: 2;
+            text-align: center;
+        }
+        #buttons span{
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 12px;
+            color: white;
+            background: black;
+            /*float: left;*/
+            display: inline-block;
+            line-height: 20px;
+        }
+        #buttons .on{
+            background-color: orangered;
+        }
+        .arrow{
+            width: 40px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 38px;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
+            position: absolute;
+            top: 210px;
+            z-index: 2;
+            display: none;
+        }
+        .arrow:hover{
+            background: rgba(0,0,0,0.7);
+        }
+        #wrap:hover .arrow{
+            display: block;
+        }
+        #prev{
+            left: 10px;
+        }
+        #next{
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <ul class="list">
+        <li><img src="img/666.jpg" alt=""/></li>
+        <li><img src="img/111.jpg" alt=""/></li>
+        <li><img src="img/222.jpg" alt=""/></li>
+        <li><img src="img/333.jpg" alt=""/></li>
+        <li><img src="img/444.jpg" alt=""/></li>
+        <li><img src="img/555.jpg" alt=""/></li>
+        <li><img src="img/666.jpg" alt=""/></li>
+        <li><img src="img/111.jpg" alt=""/></li>
+    </ul>
+    <div id="buttons">
+        <span class="on">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </div>
+    <div>
+        <a href="javascript:"  class="arrow" id="prev">&lt;</a>
+        <a href="javascript:" class="arrow" id="next">&gt;</a>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.7.2.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<script>
+    /*点击上下页切换图片*/
+
+    var index = 1;
+    var $parent = $('#wrap');
+    var $list = $parent.find('ul.list');
+    var v_width = $parent.width();//获取容器的宽度
+    //console.log(v_width);
+    $('#next').click(function () {
+        next()
+    });
+    $('#prev').click(function () {
+        prev();
+    });
+    function next(){
+        if(!$list.is(':animated')){
+            if(index>6){
+                $list.css({left:'-'+v_width+'px'}) ;//当切到最后一张111的时候，让它等于第二张111.
+                index = 1;
+            }
+            $list.animate({left:'-='+v_width},1000) ;
+            index++;
+        }
+        if(index==7){
+            $parent.find('span').eq(index-7).addClass('on')//此时index等于7，让底下原点在第一个位置亮起
+                    .siblings().removeClass('on');//所以相邻元素删除on
+        }
+        else{
+            $parent.find('span').eq(index-1).addClass('on')
+                    .siblings().removeClass('on');
+        }
+    }
+    function prev(){
+        if(!$list.is(':animated')){
+            if(index<1){
+                index = 6;
+                $list.css({left:'-'+v_width*index+'px'});
+            }
+            $list.animate({left:'+='+v_width},1000);
+            index--;
+        }
+        $parent.find('span').eq(index-1).addClass('on')
+                .siblings().removeClass('on');
+    }
+
+    //在下面span按钮通过鼠标移动实现图片切换
+
+    $('span').each(function () {//给span每个按钮都设置mouseover事件
+        $(this).mouseover(function () {
+            var text = $(this).index()+1;//获取span对应的第几个，也就是当前的索引值加1，也可以写成$(this).text()
+            $list.css({left: '-'+v_width*text+'px'});
+            $(this).addClass('on')
+                    .siblings().removeClass('on');
+            index = text;//使index值等于span的文本值，目的是为了让index值跟着底下按钮变化而变化，从而不会影响其他事件
+        });
+    });
+
+    //自动播放
+
+    $parent.hover(function () {
+        clearInterval(timer);
+    }, function () {
+        play();
+    });
+    function play(){
+        timer = setInterval(function(){
+            next();
+        },3000);
+    }
+    play();//加载页面就开始执行自动轮播
+</script>
+</html>

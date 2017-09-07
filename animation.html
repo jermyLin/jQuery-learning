@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+  .ball{
+    display: inline-block;  
+    margin-top: 100px;
+    transform:translate3d(0,0,0);
+    transition: all 2.5s cubic-bezier(0.49, -1, 0.75, 0.41);
+  }
+  .inner{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: red;
+    transform:translate3d(0,0,0);
+    transition: all 2.5s linear;
+  }
+</style>
+<body>
+  <div class="ball">
+    <span class="inner"></span>
+  </div>
+</body>
+<script type="text/javascript">
+  var ball = document.getElementsByClassName("ball")[0]
+  var inner =ball.getElementsByClassName('inner')
+   ball.addEventListener("click", function(){
+    ball.style.transform = 'translate3d(0,300px,0)'
+    inner[0].style.transform = 'translate3d(800px,0,0)'
+});
+</script>
+</html>

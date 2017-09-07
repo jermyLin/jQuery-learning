@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #panel{
+            width: 300px;
+            margin: 30px auto;
+            border: 1px solid silver;
+        }
+        .head{
+            line-height: 28px;
+            text-align: center;
+            background: grey;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .content{
+            display: none;
+            padding: 20px 10px;
+            text-indent: 2em;
+        }
+        /*.aa{
+            background: #ff3300;
+        }*/
+        span{
+            display: block;
+            width: 100px;
+            margin: 10px 0;
+            padding: 5px 10px;
+            background: silver;
+        }
+        #content{
+            width: 200px;
+            border: 1px solid silver;
+        }
+        #msg{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="panel">
+    <h5 class="head">什么是jQuery</h5>
+    <div class="content">
+            jquery是一个JavaScript（JS）框架，它支持JS的常规操作以及一些扩展，比如图形等，
+        对JSON格式也能很好的解析，ajax也做了封装，语法也比较简单。很强大。但不好的是它
+        将js语法与开发人员完全隔离，也就说你开发几年jquery后还会不会用纯js都是个问题。
+        我认识一些朋友，他们完全用Jquery开发，一些特效效果不费吹灰之力就出来了，但如果
+        抛弃jqery框架，估计最简单的JS代码都看不懂。
+    </div>
+</div>
+<div id="content">
+    外层div元素
+    <span>内层span元素</span>
+    外层div元素
+</div>
+<div id="msg">saas</div>
+<button id="btn">单击我</button>
+<div id="test"></div>
+<button id="delAll">删除全部</button>
+<button id="deltwo">删除第二个</button>
+</body>
+<script src="js/jquery-1.7.2.js"></script>
+<!--<script src="js/jquery-3.1.0.min.js"></script>-->
+<script>
+    var $content = $('.content');
+    /*1.加载DOM*/
+
+    /*
+    // 1.1jQuery写法(可以重复使用)
+
+    $(document).ready(function () {
+        //编写代码
+    });
+    $(window).load(function () {
+        //编写代码
+    });
+    //上面可简写成：
+    $(function () {
+        //编写代码
+    });
+
+    // 1.2等价于JavaScript中以下的代码（重复使用，后面的会覆盖前面的）
+    window.onload = function () {
+        //编写代码
+    };*/
+
+    /*2.事件绑定*/
+
+    // 2.1 bind()方法:
+
+    /*$('h5.head').bind('click', function () {
+        if($content.is(':visible')){//如果‘内容’显示的话
+            $(this).addClass('aa');
+            $content.hide();
+            //$(this).next().hide()
+        }
+        else{
+            $(this).removeClass('aa');
+            $content.show()
+        }
+    });*/
+
+    // 2.2 通过bind()绑定mouseover和mouseout
+
+    /*$('.head').bind('mouseover', function () {
+        $content.show()
+    }).bind('mouseout', function () {
+        $content.hide();
+    });*/
+
+    // 2.3 简写绑定事件
+
+  /*  $('.head').mouseover(function () {
+        $content.show()
+    }).mouseout(function () {
+        $content.hide();
+    });*/
+
+   /* 3. 合成事件*/
+
+    //3.1 hover()方法：hover(enter,leave),运行效果跟上面一样
+
+   /* $('.head').hover(function () {
+        $content.show()
+    }, function () {
+        $content.hide();
+    });*/
+
+    // 3.2 toggle()方法: toggle(fn1,fn2,fn3----fnN),用于模拟单击事件，第一次单击触发第一个函数fn1，以此内推··
+    /*该效果适用于通过 jQuery 隐藏的元素，或在 CSS 中声明 display:none 的元素（但不适用于 visibility:hidden 的元素*/
+    //toggle()在jQuery1.9版本已经被移除
+
+    $(function(){
+        $("h5.head").toggle(function(){
+            $(this).addClass('aa');
+            $(this).next().show();// 第一次点击时触发
+        },function(){
+            $(this).removeClass('aa');
+            $(this).next().hide();// 第二次点击时触发，之后不停的切换
+        })
+    });
+    /*$("h5.head").toggle(function(){
+        $(this).next().fadeIn();
+    },function(){
+        $(this).next().fadeOut();
+    });*/
+    /*4.事件冒泡*/
+
+    //4.1什么是冒泡
+
+    $('span').bind('click', function () {
+        var txt = $('#msg').html()+'<p>内层span元素被单击</p>';
+        $('#msg').html(txt);
+        return false;//停止冒泡
+    });
+    $('#content').bind('click', function () {
+        var txt =$('#msg').html()+ '<p>外层content元素被单击</p>';
+        $('#msg').html(txt);
+        return false;
+    });
+    $('body').bind('click', function () {
+        var txt = $('#msg').html()+'<p>body元素被单击</p>';
+        $('#msg').html(txt);
+        return false;//停止冒泡event.stopPropagation().阻止默认行为（表单提交）event.preventDefault(),都可以简写成return false
+    });
+
+    //4.2事件对象属性
+
+    /*$(element).mousedown(function () {
+        alert(e.which);//返回值1=鼠标左键，2=鼠标中键，3=鼠标右键。
+    })*/
+
+    //4.3移除事件
+
+    /*$('#btn').bind('click', function () {
+        $('#test').append('<p>我的函数1</p>')
+    }).bind('click', function () {
+        $('#test').append('<p>我的函数2</p>')
+    }).bind('click', function () {
+        $('#test').append('<p>我的函数3</p>')
+    });
+    //4.31移除按钮元素上以前注册的事件
+
+    $('#delAll').click(function () {
+        $('#btn').unbind('click');//unbind()为移除事件，里面不填参数也可以，因为btn只有click事件
+    });*/
+
+    //unbind()结构为unbind([type],[data]),第一个为事件类型，第二个为要移除的函数，具体说明如下：
+    /*（1）. 如果没有参数，则删除所有绑定事件。
+      （2）.如果提供事件类型为参数，则删除该类型的绑定事件。
+      （3）.如果第二个参数为绑定时所传递的处理函数，则删除该特定的事件处理函数*/
+
+    //4.32移除button元素其中的一个事件
+
+    /*$('#btn').bind('click', myFun1=function () {
+        $('#test').append('<p>我的函数1</p>')
+    }).bind('click',myFun2= function () {
+        $('#test').append('<p>我的函数2</p>')
+    }).bind('click',myFun3= function () {
+        $('#test').append('<p>我的函数3</p>')
+    });
+
+    $('#deltwo').click(function () {
+        $('#btn').unbind('click',myFun2);
+    });*/
+
+    //4.33 one()的用法，和bind()的用法一样，但是one表示只单击一次后立即解除绑定情况、
+
+   /* $('#btn').one('click', myFun1=function () {
+        $('#test').append('<p>我的函数1</p>')
+    }).one('click',myFun2= function () {
+        $('#test').append('<p>我的函数2</p>')
+    }).one('click',myFun3= function () {
+        $('#test').append('<p>我的函数3</p>')
+    });*/
+
+    /*5 模拟操作*/
+
+    //5.1常用模拟----页面加载完后就会立刻输出想要的效果
+
+   /* $('#btn').bind('click', myFun1=function () {
+        $('#test').append('<p>我的函数1</p>')
+    }).bind('click',myFun2= function () {
+        $('#test').append('<p>我的函数2</p>')
+    }).bind('click',myFun3= function () {
+        $('#test').append('<p>我的函数3</p>')
+    });
+    $('#btn').trigger('click');//可以直接简化成$('#btn').click();
+    */
+
+    //5.2触发自定义事件
+
+   /* $('#btn').bind('myclick',function () {
+        $('#test').append('<p>我的函数1</p>')
+    });
+    $('#btn').trigger('myclick');*/
+
+    //5.3传递数据
+
+    /*$('#btn').bind('myclick',function (event,message1,message2) {
+        $('#test').append('<p>'+message1+message2+'</p>')
+    });
+    $('#btn').trigger('myclick',['我的自定义','事件']);*/
+
+    /*6其他用法*/
+
+    //6.1一次性绑定多个事件
+
+    /*$(element).bind('mouseover mouseout', function () {
+        $('#btn').toggleClass('over');//当光标滑入滑出div时，class跟随切换'over'
+    });
+    //这段代码等价于以下代码
+    $(element).bind('mouseover', function () {
+        $('#btn').toggleClass('over');
+    }).bind('mouseout', function () {
+        $('#btn').toggleClass('over');
+    });*/
+
+    //6.2添加事件命名空间，便于管理
+
+   /* $(btn).bind('mouseover', function () {
+        $('body').append('<p>mouseover事件</p>');
+    }).bind('mouseout.sunjun', function () {
+        $('body').append('<p>mouseout事件</p>');
+    }).bind('click.sunjun', function () {
+        $('body').append('<p>click事件</p>');
+    });
+    $('#delAll').click(function () {
+        $('#btn').unbind('.sunjun');//直接删除名为sunjun的事件
+    });*/
+
+    //6.3相同事件名称，不同命名空间的执行方法
+
+    $('#btn').bind('click', function () {
+        $('body').append('<p>click事件</p>111');
+    });
+    $('#btn').bind('click.sunjun', function () {
+        $('body').append('<p>click.sunjun事件</p>');
+    });
+    $('#delAll').click(function () {
+        $('#btn').trigger('click!');// ！表示只能执行click事件，不能执行click命名空间的事件，jQuery新版本移除了这个！！！
+    })
+</script>
+</html>
