@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 
+<body>
+    <input class="ipt" type="checkbox">
+    <button class="btn">按钮</button>
+    <script src="jquery-3.1.0.min.js"></script>
+    <script>
+        $('.btn').on('click', function () {
+            $('.ipt').prop('checked',false)
+        })
+    </script>   
 </body>
+
 </html>
